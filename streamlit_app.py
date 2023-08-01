@@ -130,21 +130,20 @@ def dataProcessing():
     # muat dataset
     data = pd.read_csv('dataset.csv')
     data
-    st.write("## Preprocessing Result")  # streamlit widget
+    st.write("### Deleting suffix and prefix from encoding")  # streamlit widget
 
     # Hapus karakter yang tidak perlu pada kolom artist dan name
     data['artist'] = data['artist'].map(lambda x: str(x)[2:-1])
     data['name'] = data['name'].map(lambda x: str(x)[2:-1])
-    st.write("### Data to be deleted:")
 
-
+    st.write("### Deleted empty song names")
     #delete empty string in name column
     data = data[data['name'] != '']
 
     #reset index
     data = data.reset_index(drop=True)
 
-    st.write("## Normalization Result")  # streamlit widget
+    st.write("### MinMax Normalization Result")  # streamlit widget
     data2 = data.copy()
     data2 = data2.drop(['artist', 'name', 'year', 'popularity', 'key','duration_ms', 'mode', 'id'], axis=1) 
 
@@ -158,7 +157,7 @@ def dataProcessing():
     data2.columns = ['acousticness','danceability','energy','instrumentalness','loudness', 'liveness', 'speechiness', 'tempo','valence']
     data2   
 
-    st.write("## Dimensionality Reduction with PCA")  # streamlit widget
+    st.write("### Dimensionality Reduction with PCA")  # streamlit widget
     pca = PCA(n_components=2)
     pca.fit(data2)
     pca_data = pca.transform(data2)
@@ -170,6 +169,8 @@ def dataProcessing():
     fig = px.scatter(pca_df, x='x', y='y', title='PCA')
     st.plotly_chart(fig)  # output plotly chart using streamlit
 
+
+    st.write("### Clustering with K-Means")  # streamlit widget
 
     # rubah bentuk data ke list 
     data2 = list(zip(pca_df['x'], pca_df['y']))
@@ -184,6 +185,8 @@ def dataProcessing():
     st.write("Process Done!")
 
 st.write("# Spotify Playlist Clustering")
+st.write("### Made by Rifky Ariya Pratama")
+
 client_id = st.text_input("Enter Client ID")
 client_secret = st.text_input("Enter Client Secret")
 playlistId = st.text_input("Enter Playlist ID")
