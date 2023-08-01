@@ -183,3 +183,13 @@ def dataProcessing():
 
     st.write("Process Done!")
 
+st.write("# Spotify Playlist Clustering")
+client_id = st.text_input("Enter Client ID")
+client_secret = st.text_input("Enter Client Secret")
+playlistId = st.text_input("Enter Playlist ID")
+
+# streamlit widgets
+if st.button('Create Dataset!'):
+    token = getToken()
+    getPlaylistItems(token, playlistId)
+
