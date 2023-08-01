@@ -1,3 +1,9 @@
+# Spotify Playlist Clustering
+
+### Made by Rifky Ariya Pratama
+
+![poster for app](./mbkmposter.png)
+
 Project ini berfungsi untuk membuat sebuah aplikasi untuk melakukan proses clustering terhadap lagu-lagu yang ada di dalam sebuah playlist spotify.
 
 Lagu-lagu tersebut dikelompokan berdasarkan karakteristik lagu (audio feature) yang kita dapatkan dari spotify web API.
